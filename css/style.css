@@ -1,15 +1,21 @@
 .container {
 	width: 100vw;
-	height: 100vh;
+	height: 80vh;
 	display: flex;
 	justify-content: center;
-	flex-wrap: wrap;
+}
+
+.cat {
+	height: 80%;
+}
+
+.cat__name {
+	text-align: center;
 }
 
 .main-img {
-	height: 80%;
+	height: 100%;
 	width: 100%;
-	margin: 0 20%;
 }
 
 .main-img:hover {
@@ -17,5 +23,6 @@
 }
 
 .clicks-counter {
+	text-align: center;
 	font-size: 40px;
 }
