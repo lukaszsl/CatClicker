@@ -1,0 +1,21 @@
+.container {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.main-img {
+	height: 80%;
+	width: 100%;
+	margin: 0 20%;
+}
+
+.main-img:hover {
+	cursor: pointer;
+}
+
+.clicks-counter {
+	font-size: 40px;
+}
