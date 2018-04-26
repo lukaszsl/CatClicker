@@ -1,27 +1,55 @@
-const images = document.querySelectorAll('.main-img'),
-			counters = document.querySelectorAll('.clicks-counter'),
-			cat1Name = document.querySelector('#cat1 h2');
-			cat2Name = document.querySelector('#cat2 h2');
+const listContainer = document.querySelector('.list');
+const list = document.createElement('ol');
+const links = document.querySelectorAll('a');
+const catImg = document.querySelector('.cat__img');
 
-let clicksCounter1 = 0,
-		clicksCounter2 = 0;
+listContainer.appendChild(list);
 
-catsNames = {
-	cat1: 'James',
-	cat2: 'Jorge'
+function Cat(name, pictureUrl) {
+	this.name = name;
+	this.pictureUrl = pictureUrl;
 }
 
-cat1Name.innerText = catsNames.cat1;
-cat2Name.innerText = catsNames.cat2;
+let cat1 = new Cat('James', 'img/cat1.jpg');
+let cat2 = new Cat('Tim', 'img/cat2.jpg');
+let cat3 = new Cat('Sam', 'img/cat3.jpg');
+let cat4 = new Cat('Sandy', 'img/cat4.jpg');
+let cat5 = new Cat('Roger', 'img/cat5.jpg');
 
-images.forEach( element => {
-	element.addEventListener('click', function(e) {
-		if(e.target.id === "cat1-img") {
-			clicksCounter1++;
-			counters[0].innerText = clicksCounter1;
-		} else if(e.target.id === "cat2-img") {
-			clicksCounter2++;
-			counters[1].innerText = clicksCounter2;
-		}
+const cats = [cat1, cat2, cat3, cat4, cat5];
+
+let images = [
+	'img/cat1.jpg',
+	'img/cat2.jpg',
+	'img/cat3.jpg',
+	'img/cat4.jpg',
+	'img/cat5.jpg'
+];
+
+// Add links to the list
+for (let i=0; i<5; i++) {
+	let listNode = document.createElement('li');
+	listNode.textContent = cats[i].name;
+	listNode.value = i;
+	list.appendChild(listNode);
+}
+
+// Add event listener to list nodes. Main cat image source get path from images array.
+	list.addEventListener('click', function(e) {
+		catImg.src = images[e.target.value];
+		console.log(e.target.value)
 	});
-});
+
+
+
+// images.forEach( element => {
+// 	element.addEventListener('click', function(e) {
+// 		if(e.target.id === "cat1-img") {
+// 			clicksCounter1++;
+// 			counters[0].innerText = clicksCounter1;
+// 		} else if(e.target.id === "cat2-img") {
+// 			clicksCounter2++;
+// 			counters[1].innerText = clicksCounter2;
+// 		}
+// 	});
+// });
