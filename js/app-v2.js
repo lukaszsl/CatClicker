@@ -30,6 +30,13 @@ const data = {
 
 
 const octopus = {
+	init: function() {
+		viewList.init();
+		viewCat.init();
+		viewCat.render();
+		this.increaseCounter();
+	},
+
 	addList: function() {
 		const listContainer = document.querySelector('.list');
 		const list = document.createElement('ol');
@@ -48,16 +55,25 @@ const octopus = {
 		const catName = document.querySelector('.cat__name');
 		const catImg = document.querySelector('.cat__img');
 		const clickCounter = document.querySelector('.clicks-counter');
+		this.catId = catId;
 
 		catName.textContent = data.cats[catId].name;
 		catImg.src = data.cats[catId].imgUrl;
 		clickCounter.textContent = data.cats[catId].clickCount;
-
 	},
 
-	init: function() {
-		viewList.init();
-		viewCat.init();
+	increaseCounter: function() {
+		const catImg = document.querySelector('.cat__img');
+		const clicksCounter = document.querySelector('.clicks-counter');
+
+		catImg.addEventListener('click', function(e) {
+			for(let i=0; i<data.cats.length; i++) {
+				if(`file:///Users/lukaszsliczner/Desktop/udacity/FEND/exercises/CatClicker/${data.cats[i].imgUrl}` === e.target.src) {
+					data.cats[i].clickCount++;
+					clicksCounter.textContent = data.cats[i].clickCount;
+				}
+			}
+		});
 	}
 };
 
@@ -68,19 +84,17 @@ const viewList = {
 	}
 };
 
+
 const viewCat = {
 	init: function() {
 		octopus.addCat();
 	},
 
 	render: function() {
-		const list = document.createElement('ol');
-//TODO: Make the function set other cat after click on the list
-		list.addEventListener('click', function(e) {
-			octopus.addCat(e.target.value);
+		const listContainer = document.querySelector('.list');
 
-		 // catImg.src = cats[e.target.value].pictureUrl;
-		 // clickCounter.textContent = cats[e.target.value].counter;
+		listContainer.addEventListener('click', function(e) {
+			octopus.addCat(e.target.value);
 		});
 	}
 };
