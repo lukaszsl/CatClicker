@@ -5,6 +5,11 @@
 	align-items: center;
 }
 
+/* hiding element */
+.hide {
+	display: none;
+}
+
 .cat,
 .list {
 	height: 80%;

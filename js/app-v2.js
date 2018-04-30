@@ -34,6 +34,7 @@ const octopus = {
 		viewList.init();
 		viewCat.init();
 		viewCat.render();
+		viewAdmin.init();
 		this.increaseCounter();
 	},
 
@@ -96,6 +97,27 @@ const viewCat = {
 		listContainer.addEventListener('click', function(e) {
 			octopus.addCat(e.target.value);
 		});
+	}
+};
+
+const viewAdmin = {
+	init: function() {
+		const adminForm = document.querySelector('.admin__form');
+		adminForm.classList.add('hide');
+	},
+
+	showForm: function() {
+		const adminForm = document.querySelector('.admin__form');
+		if(adminForm.classList.contains('hide')) {
+			adminForm.classList.remove('hide');
+		}
+	},
+
+	hideForm: function() {
+		const adminForm = document.querySelector('.admin__form');
+		if(!adminForm.classList.contains('hide')) {
+			adminForm.classList.add('hide');
+		}
 	}
 };
 
