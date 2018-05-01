@@ -103,7 +103,12 @@ const viewCat = {
 const viewAdmin = {
 	init: function() {
 		const adminForm = document.querySelector('.admin__form');
+		const adminBtn = document.querySelector('.admin__btn');
 		adminForm.classList.add('hide');
+		// Show/Hide admin panel after click on admin button
+		adminBtn.addEventListener('click', function(e){
+			adminForm.classList.toggle('hide');
+		});
 	},
 
 	showForm: function() {
