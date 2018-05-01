@@ -38,21 +38,10 @@ const octopus = {
 		viewCat.render();
 		viewAdmin.init();
 		this.increaseCounter();
+		this.saveNewCatsData();
 	},
 
-	addList: function() {
-		const listContainer = document.querySelector('.list');
-		const list = document.createElement('ol');
 
-		listContainer.appendChild(list);
-
-		for (let i=0; i<5; i++) {
-			let listNode = document.createElement('li');
-			listNode.textContent = data.cats[i].name;
-			listNode.value = i;
-			list.appendChild(listNode);
-		}
-	},
 
 	addCat: function(catId = 0) {
 		const catName = document.querySelector('.cat__name');
@@ -79,14 +68,45 @@ const octopus = {
 				}
 			}
 		});
+	},
+
+	saveNewCatsData: function() {
+		const listContainer = document.querySelector('.list');
+		const saveBtn = document.querySelector('.save');
+		const catName = document.querySelector('#name');
+		const catImgUrl = document.querySelector('#imgUrl');
+		const catClicks = document.querySelector('#clicks');
+
+		saveBtn.addEventListener('click', function(e){
+			e.preventDefault();
+			data.currentCat.name = catName.value;
+			data.currentCat.clickCounter = catClicks.value;
+			data.currentCat.imgUrl = catImgUrl.value;
+			viewList.render();
+			viewCat.render();
+		});
 	}
 };
 
 
 const viewList = {
 	init: function() {
-		octopus.addList();
-	}
+		this.render();
+	},
+
+	render: function() {
+		const listContainer = document.querySelector('.list');
+		const list = document.createElement('ol');
+		listContainer.innerHTML = '';
+		listContainer.appendChild(list);
+
+		for (let i=0; i<5; i++) {
+			let listNode = document.createElement('li');
+			listNode.textContent = data.cats[i].name;
+			listNode.value = i;
+			list.appendChild(listNode);
+		}
+	},
 };
 
 
@@ -122,19 +142,19 @@ const viewAdmin = {
 		});
 	},
 
-	showForm: function() {
-		const adminForm = document.querySelector('.admin__form');
-		if(adminForm.classList.contains('hide')) {
-			adminForm.classList.remove('hide');
-		}
-	},
-
-	hideForm: function() {
-		const adminForm = document.querySelector('.admin__form');
-		if(!adminForm.classList.contains('hide')) {
-			adminForm.classList.add('hide');
-		}
-	}
+	// showForm: function() {
+	// 	const adminForm = document.querySelector('.admin__form');
+	// 	if(adminForm.classList.contains('hide')) {
+	// 		adminForm.classList.remove('hide');
+	// 	}
+	// },
+	//
+	// hideForm: function() {
+	// 	const adminForm = document.querySelector('.admin__form');
+	// 	if(!adminForm.classList.contains('hide')) {
+	// 		adminForm.classList.add('hide');
+	// 	}
+	// }
 };
 
 
