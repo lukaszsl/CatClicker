@@ -1,5 +1,5 @@
 const data = {
-	cats: [
+	cats:[
 		{
 			name: 'James',
 			clickCount: 0,
@@ -25,7 +25,9 @@ const data = {
 			clickCount: 0,
 			imgUrl: 'img/cat5.jpg'
 		}
-	]
+	],
+
+	currentCat: undefined
 };
 
 
@@ -57,6 +59,8 @@ const octopus = {
 		const catImg = document.querySelector('.cat__img');
 		const clickCounter = document.querySelector('.clicks-counter');
 		this.catId = catId;
+
+		data.currentCat = data.cats[catId];
 
 		catName.textContent = data.cats[catId].name;
 		catImg.src = data.cats[catId].imgUrl;
@@ -104,10 +108,17 @@ const viewAdmin = {
 	init: function() {
 		const adminForm = document.querySelector('.admin__form');
 		const adminBtn = document.querySelector('.admin__btn');
+		const cancelBtn = document.querySelector('.cancel');
+
 		adminForm.classList.add('hide');
 		// Show/Hide admin panel after click on admin button
-		adminBtn.addEventListener('click', function(e){
+		adminBtn.addEventListener('click', function(){
 			adminForm.classList.toggle('hide');
+		});
+		// Hide admin panel after click on cancel button
+		cancelBtn.addEventListener('click', function(e){
+			e.preventDefault();
+			adminForm.classList.add('hide');
 		});
 	},
 
