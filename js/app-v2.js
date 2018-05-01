@@ -3,27 +3,32 @@ const data = {
 		{
 			name: 'James',
 			clickCount: 0,
-			imgUrl: 'img/cat1.jpg'
+			imgUrl: 'img/cat1.jpg',
+			id: 0
 		},
 		{
 			name: 'Tim',
 			clickCount: 0,
-			imgUrl: 'img/cat2.jpg'
+			imgUrl: 'img/cat2.jpg',
+			id: 1
 		},
 		{
 			name: 'Sam',
 			clickCount: 0,
-			imgUrl: 'img/cat3.jpg'
+			imgUrl: 'img/cat3.jpg',
+			id: 2
 		},
 		{
 			name: 'Sandy',
 			clickCount: 0,
-			imgUrl: 'img/cat4.jpg'
+			imgUrl: 'img/cat4.jpg',
+			id: 3
 		},
 		{
 			name: 'Roger',
 			clickCount: 0,
-			imgUrl: 'img/cat5.jpg'
+			imgUrl: 'img/cat5.jpg',
+			id: 4
 		}
 	],
 
@@ -62,9 +67,10 @@ const octopus = {
 
 		catImg.addEventListener('click', function(e) {
 			for(let i=0; i<data.cats.length; i++) {
+
 				if(`file:///Users/lukaszsliczner/Desktop/udacity/FEND/exercises/CatClicker/${data.cats[i].imgUrl}` === e.target.src) {
-					data.cats[i].clickCount++;
-					clicksCounter.textContent = data.cats[i].clickCount;
+					data.currentCat.clickCount++;
+					clicksCounter.textContent = data.currentCat.clickCount;
 				}
 			}
 		});
@@ -80,7 +86,7 @@ const octopus = {
 		saveBtn.addEventListener('click', function(e){
 			e.preventDefault();
 			data.currentCat.name = catName.value;
-			data.currentCat.clickCounter = catClicks.value;
+			data.currentCat.clickCount = catClicks.value;
 			data.currentCat.imgUrl = catImgUrl.value;
 			viewList.render();
 			viewCat.render();
@@ -92,6 +98,11 @@ const octopus = {
 const viewList = {
 	init: function() {
 		this.render();
+		const listContainer = document.querySelector('.list');
+
+		listContainer.addEventListener('click', function(e) {
+			octopus.addCat(e.target.value);
+		});
 	},
 
 	render: function() {
@@ -116,11 +127,7 @@ const viewCat = {
 	},
 
 	render: function() {
-		const listContainer = document.querySelector('.list');
-
-		listContainer.addEventListener('click', function(e) {
-			octopus.addCat(e.target.value);
-		});
+		octopus.addCat(data.currentCat.id);
 	}
 };
 
